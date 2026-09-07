@@ -21,22 +21,21 @@ export function Home() {
   const active = !!(filters.category || filters.players !== null || filters.maxTime !== null || filters.maxComplexity !== null || filters.freeOnly || filters.query)
   const featured = useMemo(() => pickFeatured(), [])
 
-  const rows = useMemo(() => {
-    const has = (g: GameMeta, ...tags: string[]) => tags.some((t) => g.tags.includes(t))
-    return [
-      { title: 'Bluffing & betrayal', subtitle: 'Avalon, Coup, Werewolf — lie to your friends', games: CATALOG.filter((g) => g.categories.includes('social deduction')) },
-      { title: 'Quick party hits', subtitle: 'Under 20 minutes, no rules explanation needed', games: CATALOG.filter((g) => g.maxMinutes <= 20 && g.categories.includes('party')) },
-      { title: 'Big group? No problem', subtitle: '8+ players', games: CATALOG.filter((g) => g.maxPlayers >= 8) },
-      { title: 'Word & drawing games', games: CATALOG.filter((g) => g.categories.includes('word') || g.categories.includes('drawing')) },
-      { title: 'Just the two of you', subtitle: 'Great head-to-head', games: CATALOG.filter((g) => g.minPlayers <= 2 && (g.bestPlayers.includes(2) || g.maxPlayers === 2)) },
-      { title: 'Play together, win together', subtitle: 'Co-operative', games: CATALOG.filter((g) => g.categories.includes('co-op')) },
-      { title: 'Deep strategy', subtitle: 'Settle in for the evening', games: CATALOG.filter((g) => g.categories.includes('strategy') && g.complexity >= 3) },
-      { title: 'Card games', games: CATALOG.filter((g) => g.categories.includes('card game')) },
-      { title: 'Classics reimagined', games: CATALOG.filter((g) => g.categories.includes('classic')) },
-      { title: 'Family favourites', games: CATALOG.filter((g) => g.categories.includes('family')) },
-      { title: 'Trivia & knowledge', games: CATALOG.filter((g) => g.categories.includes('trivia') || has(g, 'trivia')) },
-    ]
-  }, [])
+  // One shelf per category; each game appears once, under its primary (first-listed) category.
+  const rows = useMemo(
+    () =>
+      ALL_CATEGORIES.map((c) => ({
+        title: `${CATEGORY_INFO[c].emoji} ${c[0].toUpperCase()}${c.slice(1)}`,
+        subtitle: CATEGORY_INFO[c].blurb,
+        games: CATALOG.filter((g) => g.categories[0] === c),
+        action: (
+          <button type="button" onClick={() => set('category', c)} className="shrink-0 text-xs text-slate-400 hover:text-white">
+            See all →
+          </button>
+        ),
+      })),
+    [],
+  )
 
   return (
     <Layout fullBleed>
@@ -122,7 +121,6 @@ export function Home() {
           {rows.map((r) => (
             <Row key={r.title} {...r} />
           ))}
-          <Row title={`All ${CATALOG.length} games`} subtitle="A to Z" games={[...CATALOG].sort((a, b) => a.name.localeCompare(b.name))} />
         </div>
       )}
     </Layout>
