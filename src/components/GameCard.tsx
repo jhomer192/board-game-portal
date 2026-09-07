@@ -1,60 +1,51 @@
-import { COMPLEXITY_LABEL, formatPlayers, formatTime, type GameMeta } from '../../shared/catalog.ts'
-import { Link } from '../lib/router.tsx'
+import { formatPlayers, formatTime, type GameMeta } from '../../shared/catalog.ts'
+import { Link, navigate } from '../lib/router.tsx'
 import { screenshotFor } from '../lib/screenshots.ts'
-import { Badge, Complexity } from './ui.tsx'
 
-export function GameCard({ game }: { game: GameMeta }) {
+/** Netflix-style poster tile: 16:9 screenshot, title strip, hover reveals details + play. */
+export function GameCard({ game, className = '' }: { game: GameMeta; className?: string }) {
   const primary = game.links[0]
   const shot = screenshotFor(game.slug)
+  const href = `/games/${game.slug}`
   return (
-    <article className="card group flex flex-col overflow-hidden transition hover:-translate-y-0.5 hover:ring-indigo-500/60">
-      <Link to={`/games/${game.slug}`} className={`relative flex h-36 items-center justify-center overflow-hidden bg-gradient-to-br ${game.gradient} focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400`}>
-        {shot ? (
-          <>
-            <img src={shot} alt={`${primary.label} screenshot`} loading="lazy" className="absolute inset-0 h-full w-full object-cover object-top transition duration-300 group-hover:scale-105" />
-            <span className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent" />
-            <span className="absolute bottom-2 left-3 text-3xl drop-shadow-lg">{game.emoji}</span>
-          </>
-        ) : (
-          <span className="text-6xl drop-shadow-lg transition group-hover:scale-110">{game.emoji}</span>
-        )}
-        <span className="absolute left-3 top-3 rounded-full bg-black/40 px-2 py-0.5 text-xs font-medium text-white backdrop-blur">
-          👥 {formatPlayers(game)}
-        </span>
-        <span className="absolute right-3 top-3 rounded-full bg-black/40 px-2 py-0.5 text-xs font-medium text-white backdrop-blur">⏱ {formatTime(game)}</span>
-        {game.price !== 'free' ? (
-          <span className="absolute bottom-3 right-3 rounded-full bg-black/40 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-white/90 backdrop-blur">
-            {game.price}
-          </span>
-        ) : null}
-      </Link>
-      <div className="flex flex-1 flex-col gap-2 p-4">
-        <div className="flex items-start justify-between gap-2">
-          <Link to={`/games/${game.slug}`} className="text-lg font-bold leading-tight hover:text-indigo-200">
-            {game.name}
-          </Link>
-          <span className="mt-1 shrink-0" title={`${COMPLEXITY_LABEL[game.complexity]} complexity`}>
-            <Complexity level={game.complexity} />
-          </span>
+    <article
+      className={`group relative aspect-video w-full cursor-pointer overflow-hidden rounded-lg bg-white/5 ring-1 ring-white/10 transition-[transform,box-shadow] duration-300 ease-out hover:z-10 hover:scale-[1.06] hover:shadow-2xl hover:shadow-black/60 hover:ring-white/40 focus-within:scale-[1.06] focus-within:ring-white/60 ${className}`}
+      onClick={() => navigate(href)}
+    >
+      {shot ? (
+        <img src={shot} alt="" loading="lazy" className="absolute inset-0 h-full w-full object-cover object-top transition duration-500 group-hover:scale-105" />
+      ) : (
+        <div className={`absolute inset-0 flex items-center justify-center bg-gradient-to-br ${game.gradient}`}>
+          <span className="text-6xl drop-shadow-lg">{game.emoji}</span>
         </div>
-        <p className="text-sm text-slate-300">{game.tagline}</p>
-        <div className="flex flex-wrap gap-1.5">
-          {game.categories.map((c) => (
-            <Badge key={c} tone="violet">
-              {c}
-            </Badge>
-          ))}
-          {game.bestPlayers.length ? <Badge title="Best player count">★ best at {game.bestPlayers.join(', ')}</Badge> : null}
-        </div>
-        <div className="mt-auto flex items-center gap-2 pt-2">
-          <a href={primary.url} target="_blank" rel="noopener noreferrer" className="btn-primary flex-1 py-2 text-sm">
-            Play on {primary.label} ↗
+      )}
+      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-black/5 opacity-90 transition group-hover:opacity-100" />
+
+      {game.price !== 'free' ? (
+        <span className="absolute right-2 top-2 rounded bg-black/60 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-white/90 backdrop-blur">{game.price}</span>
+      ) : null}
+
+      <div className="absolute inset-x-0 bottom-0 flex flex-col gap-1 p-3">
+        <Link to={href} className="text-base font-bold leading-tight drop-shadow md:text-lg" onClick={(e) => e.stopPropagation()}>
+          {game.emoji} {game.name}
+        </Link>
+        <p className="text-xs text-slate-300/90 drop-shadow">
+          👥 {formatPlayers(game)} · ⏱ {formatTime(game)}
+          {game.bestPlayers.length ? ` · ★ ${game.bestPlayers.join('/')}` : ''}
+        </p>
+        <div className="hidden max-h-0 items-center gap-2 overflow-hidden opacity-0 transition-all duration-300 group-hover:max-h-12 group-hover:pt-1 group-hover:opacity-100 focus-within:max-h-12 focus-within:opacity-100 md:flex">
+          <a
+            href={primary.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(e) => e.stopPropagation()}
+            className="btn-primary flex-1 py-1.5 text-xs"
+          >
+            ▶ Play
           </a>
-          {game.links.length > 1 ? (
-            <Link to={`/games/${game.slug}`} className="btn-ghost px-3 py-2 text-sm" title="More ways to play">
-              +{game.links.length - 1}
-            </Link>
-          ) : null}
+          <Link to={href} onClick={(e) => e.stopPropagation()} className="btn-ghost px-3 py-1.5 text-xs">
+            Info
+          </Link>
         </div>
       </div>
     </article>

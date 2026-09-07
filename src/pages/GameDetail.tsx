@@ -12,7 +12,7 @@ export function GameDetail({ slug }: { slug: string }) {
       <Layout>
         <p className="py-16 text-center text-slate-400">
           That game isn't in the catalog.{' '}
-          <Link to="/" className="text-indigo-300 underline">
+          <Link to="/" className="text-slate-200 underline">
             Back to browse
           </Link>
         </p>
@@ -48,7 +48,7 @@ export function GameDetail({ slug }: { slug: string }) {
           {shot ? (
             <a href={primary.url} target="_blank" rel="noopener noreferrer" className="card group relative block overflow-hidden" title={`Open ${primary.label}`}>
               <img src={shot} alt={`Screenshot of ${primary.label}`} className="aspect-[16/10] w-full object-cover object-top transition duration-300 group-hover:scale-[1.02]" />
-              <span className="absolute bottom-3 right-3 rounded-full bg-slate-950/70 px-3 py-1 text-xs font-medium text-white backdrop-blur">{primary.label} ↗</span>
+              <span className="absolute bottom-3 right-3 rounded-full bg-black/70 px-3 py-1 text-xs font-medium text-white backdrop-blur">{primary.label} ↗</span>
             </a>
           ) : null}
           <Panel>
@@ -101,7 +101,7 @@ export function GameDetail({ slug }: { slug: string }) {
       {similar.length ? (
         <section className="mt-8">
           <h2 className="mb-3 text-xl font-bold">If you like this, try</h2>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4">
             {similar.map((g) => (
               <GameCard key={g.slug} game={g} />
             ))}

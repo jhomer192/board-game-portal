@@ -1,41 +1,41 @@
 import type { ReactNode } from 'react'
 import { Link, usePath } from '../lib/router.tsx'
 
-export function Layout({ children }: { children: ReactNode }) {
+export function Layout({ children, fullBleed = false }: { children: ReactNode; fullBleed?: boolean }) {
   const path = usePath()
   const nav = [
     { to: '/', label: 'Browse' },
     { to: '/discover', label: 'Discover' },
   ]
   return (
-    <div className="mx-auto flex min-h-dvh w-full max-w-6xl flex-col px-4 pb-[max(1.5rem,env(safe-area-inset-bottom))] pt-[max(0.75rem,env(safe-area-inset-top))]">
-      <header className="mb-5 flex items-center gap-3">
-        <Link to="/" className="flex items-center gap-2 text-lg font-bold tracking-tight">
-          <span className="text-2xl">🎲</span>
-          <span>Tabletop Portal</span>
-        </Link>
-        <nav className="ml-auto flex gap-1 rounded-xl bg-slate-900 p-1 ring-1 ring-slate-800">
-          {nav.map((n) => {
-            const active = n.to === '/' ? path === '/' || path.startsWith('/games') : path.startsWith(n.to)
-            return (
-              <Link key={n.to} to={n.to} className={`rounded-lg px-3 py-1.5 text-sm font-medium transition ${active ? 'bg-indigo-500 text-white' : 'text-slate-300 hover:text-white'}`}>
-                {n.label}
-              </Link>
-            )
-          })}
-        </nav>
+    <div className="flex min-h-dvh w-full flex-col pb-[max(1.5rem,env(safe-area-inset-bottom))]">
+      <header className="sticky top-0 z-40 bg-[#0b0b10]/70 pt-[max(0.5rem,env(safe-area-inset-top))] backdrop-blur-md">
+        <div className="mx-auto flex h-14 w-full max-w-[1600px] items-center gap-4 px-4 md:px-8">
+          <Link to="/" className="flex items-center gap-2 text-lg font-black tracking-tight">
+            <span className="text-2xl">🎲</span>
+            <span className="hidden sm:inline">Tabletop</span>
+          </Link>
+          <nav className="flex gap-4 text-sm">
+            {nav.map((n) => {
+              const active = n.to === '/' ? path === '/' || path.startsWith('/games') : path.startsWith(n.to)
+              return (
+                <Link key={n.to} to={n.to} className={`font-medium transition ${active ? 'text-white' : 'text-slate-400 hover:text-slate-200'}`}>
+                  {n.label}
+                </Link>
+              )
+            })}
+          </nav>
+        </div>
       </header>
-      <main className="flex-1">{children}</main>
-      <footer className="mt-10 text-center text-xs text-slate-500">
-        Links go to third-party sites. Most work best alongside a voice or video call.
-      </footer>
+      <main className={`flex-1 ${fullBleed ? '' : 'mx-auto w-full max-w-[1600px] px-4 md:px-8'}`}>{children}</main>
+      <footer className="mt-12 text-center text-xs text-slate-500">Links go to third-party sites. Most work best alongside a voice or video call.</footer>
     </div>
   )
 }
 
 export function Badge({ children, tone = 'slate', title }: { children: ReactNode; tone?: 'slate' | 'red' | 'blue' | 'green' | 'amber' | 'violet'; title?: string }) {
   const tones = {
-    slate: 'bg-slate-800 text-slate-300',
+    slate: 'bg-white/10 text-slate-200',
     red: 'bg-rose-500/20 text-rose-300',
     blue: 'bg-sky-500/20 text-sky-300',
     green: 'bg-emerald-500/20 text-emerald-300',
@@ -55,7 +55,7 @@ export function Chip({ active, onClick, children }: { active: boolean; onClick: 
       type="button"
       onClick={onClick}
       aria-pressed={active}
-      className={`rounded-full px-3 py-1.5 text-sm capitalize transition ${active ? 'bg-indigo-500 text-white' : 'bg-slate-800 text-slate-300 hover:bg-slate-700'}`}
+      className={`shrink-0 rounded-full border px-3.5 py-1.5 text-sm capitalize transition ${active ? 'border-white bg-white text-black' : 'border-white/15 bg-white/[0.04] text-slate-300 hover:border-white/40 hover:text-white'}`}
     >
       {children}
     </button>
@@ -63,14 +63,14 @@ export function Chip({ active, onClick, children }: { active: boolean; onClick: 
 }
 
 export function Panel({ children, className = '' }: { children: ReactNode; className?: string }) {
-  return <section className={`card p-4 ${className}`}>{children}</section>
+  return <section className={`card p-4 md:p-5 ${className}`}>{children}</section>
 }
 
 export function Complexity({ level }: { level: number }) {
   return (
     <span className="inline-flex items-center gap-0.5" aria-label={`Complexity ${level} of 5`}>
       {[1, 2, 3, 4, 5].map((i) => (
-        <span key={i} className={`h-2 w-2 rounded-full ${i <= level ? 'bg-indigo-400' : 'bg-slate-700'}`} />
+        <span key={i} className={`h-1.5 w-3 rounded-full ${i <= level ? 'bg-white' : 'bg-white/20'}`} />
       ))}
     </span>
   )
