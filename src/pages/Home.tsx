@@ -5,12 +5,13 @@ import { Chip, Layout } from '../components/ui.tsx'
 import { Link } from '../lib/router.tsx'
 import { screenshotFor } from '../lib/screenshots.ts'
 
-const FEATURED_SLUGS = ['codenames', 'avalon', 'coup', 'one-night-werewolf', 'secret-hitler', 'skribbl', 'spyfall', 'decrypto']
-
-function pickFeatured(): GameMeta {
-  const day = Math.floor(Date.now() / 86_400_000)
-  const pool = FEATURED_SLUGS.map((s) => CATALOG.find((g) => g.slug === s)).filter((g): g is GameMeta => !!g && !!screenshotFor(g.slug))
-  return pool[day % pool.length] ?? CATALOG[0]
+/** Game of the day: a different catalog game every local calendar day, same for everyone. */
+function gameOfTheDay(date = new Date()): GameMeta {
+  const key = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`
+  let h = 2166136261
+  for (const ch of key) h = Math.imul(h ^ ch.charCodeAt(0), 16777619) >>> 0
+  const pool = CATALOG.filter((g) => !!screenshotFor(g.slug))
+  return pool[h % pool.length] ?? CATALOG[0]
 }
 
 export function Home() {
@@ -18,7 +19,7 @@ export function Home() {
   const set = <K extends keyof Filters>(k: K, v: Filters[K]) => setFilters((f) => ({ ...f, [k]: v }))
   const results = useMemo(() => searchCatalog(filters), [filters])
   const active = !!(filters.category || filters.players !== null || filters.maxTime !== null || filters.maxComplexity !== null || filters.freeOnly || filters.query)
-  const featured = useMemo(() => pickFeatured(), [])
+  const featured = useMemo(() => gameOfTheDay(), [])
 
   // Shelves are built from the filtered results so search/chips/selects narrow every list.
   // By category: each game appears once, under its primary (first-listed) category.
@@ -163,7 +164,7 @@ function Hero({ game }: { game: GameMeta }) {
       <div className="absolute inset-0 bg-gradient-to-r from-[#0b0b10] via-[#0b0b10]/70 to-[#0b0b10]/10" />
       <div className="absolute inset-0 bg-gradient-to-t from-[#0b0b10] via-[#0b0b10]/80 to-[#0b0b10]/20 md:via-[#0b0b10]/30 md:to-transparent" />
       <div className="animate-fade-up relative mx-auto flex h-full min-h-[70vh] w-full max-w-[1600px] flex-col justify-end gap-4 px-4 pb-16 pt-32 md:min-h-[78vh] md:px-8 md:pb-24">
-        <span className="text-xs font-bold uppercase tracking-[0.2em] text-slate-300">✦ Tonight’s pick · {CATALOG.length} games to play online</span>
+        <span className="text-xs font-bold uppercase tracking-[0.2em] text-slate-300">✦ Game of the day · {new Date().toLocaleDateString(undefined, { weekday: 'long', month: 'short', day: 'numeric' })} · {CATALOG.length} games to play online</span>
         <h1 className="max-w-3xl text-4xl font-black leading-[1.05] tracking-tight drop-shadow-lg md:text-6xl lg:text-7xl">
           {game.emoji} {game.name}
         </h1>
