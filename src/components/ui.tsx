@@ -28,7 +28,10 @@ export function Layout({ children, fullBleed = false }: { children: ReactNode; f
         </div>
       </header>
       <main className={`flex-1 ${fullBleed ? '' : 'mx-auto w-full max-w-[1600px] px-4 md:px-8'}`}>{children}</main>
-      <footer className="mt-12 text-center text-xs text-slate-500">Links go to third-party sites. Most work best alongside a voice or video call.</footer>
+      <footer className="mt-12 text-center text-xs text-slate-500">
+        Links go to third-party sites. Most work best alongside a voice or video call. Built by{' '}
+        <a href="https://jackhomer.com/" className="text-slate-300 hover:text-white">Jack Homer</a>.
+      </footer>
     </div>
   )
 }
