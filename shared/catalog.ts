@@ -102,7 +102,6 @@ export const CATALOG: GameMeta[] = [
     needsCall: true,
     links: [
       { label: 'netgames.io', url: 'https://netgames.io/games/onu-werewolf/', note: 'Free, no accounts' },
-      { label: 'onenightultimate.com', url: 'https://www.onenightultimate.com/', note: 'Official app & narrator' },
     ],
   },
   {
@@ -519,7 +518,7 @@ export const CATALOG: GameMeta[] = [
     gradient: 'from-violet-400 via-purple-600 to-indigo-900',
     price: 'free',
     needsCall: true,
-    links: [{ label: 'themind.online', url: 'https://themind.online' }],
+    links: [{ label: 'themindgame.app', url: 'https://themindgame.app/', note: 'Free fan version, lobby codes' }, { label: 'themind.rafearnold.co.uk', url: 'https://themind.rafearnold.co.uk/', note: 'Free, minimal' }],
   },
   {
     slug: 'catan',
@@ -578,7 +577,6 @@ export const CATALOG: GameMeta[] = [
     price: 'freemium',
     links: [
       { label: 'Board Game Arena', url: BGA('tickettoride') },
-      { label: 'ticket-to-ride.com', url: 'https://www.ticket-to-ride.com', note: 'Official apps' },
     ],
   },
   {
