@@ -2,6 +2,8 @@ import { CATALOG, CATALOG_BY_SLUG, COMPLEXITY_LABEL, formatPlayers, formatTime, 
 import { GameCard } from '../components/GameCard.tsx'
 import { Badge, Complexity, Layout, Panel } from '../components/ui.tsx'
 import { Link } from '../lib/router.tsx'
+import { screenshotFor } from '../lib/screenshots.ts'
+import { ABOUT } from '../../shared/about.ts'
 
 export function GameDetail({ slug }: { slug: string }) {
   const game = CATALOG_BY_SLUG[slug]
@@ -18,6 +20,9 @@ export function GameDetail({ slug }: { slug: string }) {
     )
   }
   const similar = similarTo(game)
+  const shot = screenshotFor(game.slug)
+  const about = ABOUT[game.slug] ?? [game.description]
+  const primary = game.links[0]
   return (
     <Layout>
       <Link to="/" className="mb-4 inline-block text-sm text-slate-400 hover:text-white">
@@ -40,9 +45,19 @@ export function GameDetail({ slug }: { slug: string }) {
 
       <div className="grid gap-4 md:grid-cols-[1fr_320px]">
         <div className="flex flex-col gap-4">
+          {shot ? (
+            <a href={primary.url} target="_blank" rel="noopener noreferrer" className="card group relative block overflow-hidden" title={`Open ${primary.label}`}>
+              <img src={shot} alt={`Screenshot of ${primary.label}`} className="aspect-[16/10] w-full object-cover object-top transition duration-300 group-hover:scale-[1.02]" />
+              <span className="absolute bottom-3 right-3 rounded-full bg-slate-950/70 px-3 py-1 text-xs font-medium text-white backdrop-blur">{primary.label} ↗</span>
+            </a>
+          ) : null}
           <Panel>
             <h2 className="mb-2 font-semibold">About</h2>
-            <p className="text-slate-300">{game.description}</p>
+            <div className="space-y-3 text-slate-300">
+              {about.map((p, i) => (
+                <p key={i}>{p}</p>
+              ))}
+            </div>
             <div className="mt-3 flex flex-wrap gap-1.5">
               {game.tags.map((t) => (
                 <Badge key={t}>{t}</Badge>

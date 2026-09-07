@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest'
+import { ABOUT } from './about.ts'
 import { ALL_CATEGORIES, CATALOG, CATALOG_BY_SLUG, EMPTY_FILTERS, searchCatalog } from './catalog.ts'
 
 describe('catalog data', () => {
@@ -16,6 +17,11 @@ describe('catalog data', () => {
         expect(b).toBeLessThanOrEqual(g.maxPlayers)
       }
     }
+  })
+
+  it('every game has a long write-up and no orphan write-ups exist', () => {
+    for (const g of CATALOG) expect(ABOUT[g.slug]?.length, g.slug).toBeGreaterThan(0)
+    for (const slug of Object.keys(ABOUT)) expect(CATALOG_BY_SLUG[slug], slug).toBeDefined()
   })
 
   it('every category has at least one game', () => {
