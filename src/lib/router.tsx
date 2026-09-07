@@ -1,9 +1,17 @@
 import { useEffect, useState } from 'react'
 
+const BASE = import.meta.env.BASE_URL.replace(/\/$/, '')
+
+function currentPath(): string {
+  const p = window.location.pathname
+  const rel = p.startsWith(BASE) ? p.slice(BASE.length) : p
+  return rel || '/'
+}
+
 export function usePath(): string {
-  const [path, setPath] = useState(() => window.location.pathname)
+  const [path, setPath] = useState(currentPath)
   useEffect(() => {
-    const onPop = () => setPath(window.location.pathname)
+    const onPop = () => setPath(currentPath())
     window.addEventListener('popstate', onPop)
     window.addEventListener('bgp:navigate', onPop)
     return () => {
@@ -15,8 +23,9 @@ export function usePath(): string {
 }
 
 export function navigate(to: string, replace = false) {
-  if (replace) window.history.replaceState(null, '', to)
-  else window.history.pushState(null, '', to)
+  const url = BASE + to
+  if (replace) window.history.replaceState(null, '', url)
+  else window.history.pushState(null, '', url)
   window.dispatchEvent(new Event('bgp:navigate'))
 }
 
@@ -24,7 +33,7 @@ export function Link(props: React.AnchorHTMLAttributes<HTMLAnchorElement> & { to
   const { to, onClick, ...rest } = props
   return (
     <a
-      href={to}
+      href={BASE + to}
       onClick={(e) => {
         onClick?.(e)
         if (e.defaultPrevented || e.metaKey || e.ctrlKey || e.button !== 0) return
