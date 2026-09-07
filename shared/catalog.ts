@@ -1,4 +1,5 @@
 import { MORE_GAMES } from './catalog-more.ts'
+import { BATCH3_GAMES } from './catalog-batch3.ts'
 
 export type Category =
   | 'party'
@@ -1124,6 +1125,7 @@ export const CATALOG: GameMeta[] = [
     ],
   },
   ...MORE_GAMES,
+  ...BATCH3_GAMES,
 ]
 
 export const CATALOG_BY_SLUG: Record<string, GameMeta> = Object.fromEntries(CATALOG.map((g) => [g.slug, g]))

@@ -101,7 +101,7 @@ export function GameDetail({ slug }: { slug: string }) {
       {similar.length ? (
         <section className="mt-8">
           <h2 className="mb-3 text-xl font-bold">If you like this, try</h2>
-          <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {similar.map((g) => (
               <GameCard key={g.slug} game={g} />
             ))}

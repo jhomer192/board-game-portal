@@ -124,7 +124,7 @@ export function Discover() {
           {picks.length === 0 ? (
             <p className="py-16 text-center text-slate-400">Try fewer categories or a different player count.</p>
           ) : (
-            <div className="grid grid-cols-2 gap-3 md:grid-cols-3">
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3">
               {picks.map((g) => (
                 <GameCard key={g.slug} game={g} />
               ))}
