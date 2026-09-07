@@ -116,7 +116,7 @@ export const ABOUT: Record<string, string[]> = {
   'the-mind': [
     'Each player has a hand of numbered cards from 1 to 100. Together, with absolutely no communication, you must play them all to a single pile in ascending order. You just… feel when it is your turn.',
     'It sounds impossible and then it happens, and the room goes silent and then cheers. A genuinely strange and delightful experience.',
-    'themind.online is a free fan version; Board Game Arena has the official game.',
+    'themindgame.app is a free fan version with lobby codes for 2–4 players.',
   ],
   catan: [
     'Settle an island of hexagonal terrain. Each turn the dice decide which tiles produce resources — wood, brick, wheat, sheep, ore — and you trade with rivals to build roads, settlements, and cities. First to ten victory points wins.',
