@@ -1,13 +1,23 @@
 import { COMPLEXITY_LABEL, formatPlayers, formatTime, type GameMeta } from '../../shared/catalog.ts'
 import { Link } from '../lib/router.tsx'
+import { screenshotFor } from '../lib/screenshots.ts'
 import { Badge, Complexity } from './ui.tsx'
 
 export function GameCard({ game }: { game: GameMeta }) {
   const primary = game.links[0]
+  const shot = screenshotFor(game.slug)
   return (
     <article className="card group flex flex-col overflow-hidden transition hover:-translate-y-0.5 hover:ring-indigo-500/60">
-      <Link to={`/games/${game.slug}`} className={`relative flex h-28 items-center justify-center bg-gradient-to-br ${game.gradient} focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400`}>
-        <span className="text-6xl drop-shadow-lg transition group-hover:scale-110">{game.emoji}</span>
+      <Link to={`/games/${game.slug}`} className={`relative flex h-36 items-center justify-center overflow-hidden bg-gradient-to-br ${game.gradient} focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400`}>
+        {shot ? (
+          <>
+            <img src={shot} alt={`${primary.label} screenshot`} loading="lazy" className="absolute inset-0 h-full w-full object-cover object-top transition duration-300 group-hover:scale-105" />
+            <span className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent" />
+            <span className="absolute bottom-2 left-3 text-3xl drop-shadow-lg">{game.emoji}</span>
+          </>
+        ) : (
+          <span className="text-6xl drop-shadow-lg transition group-hover:scale-110">{game.emoji}</span>
+        )}
         <span className="absolute left-3 top-3 rounded-full bg-black/40 px-2 py-0.5 text-xs font-medium text-white backdrop-blur">
           👥 {formatPlayers(game)}
         </span>
