@@ -1,6 +1,5 @@
-import { useMemo, useState } from 'react'
+import { useMemo, useState, type ReactNode } from 'react'
 import { ALL_CATEGORIES, CATALOG, CATEGORY_INFO, COMPLEXITY_LABEL, EMPTY_FILTERS, formatPlayers, formatTime, searchCatalog, type Filters, type GameMeta } from '../../shared/catalog.ts'
-import { GameCard } from '../components/GameCard.tsx'
 import { Row } from '../components/Row.tsx'
 import { Chip, Layout } from '../components/ui.tsx'
 import { Link } from '../lib/router.tsx'
@@ -21,27 +20,24 @@ export function Home() {
   const active = !!(filters.category || filters.players !== null || filters.maxTime !== null || filters.maxComplexity !== null || filters.freeOnly || filters.query)
   const featured = useMemo(() => pickFeatured(), [])
 
-  // One shelf per category; each game appears once, under its primary (first-listed) category.
-  const rows = useMemo(
+  // Shelves are built from the filtered results so search/chips/selects narrow every list.
+  // By category: each game appears once, under its primary (first-listed) category.
+  const byCategory = useMemo(
     () =>
       ALL_CATEGORIES.map((c) => ({
         title: `${CATEGORY_INFO[c].emoji} ${c[0].toUpperCase()}${c.slice(1)}`,
         subtitle: CATEGORY_INFO[c].blurb,
-        games: CATALOG.filter((g) => g.categories[0] === c),
-        action: (
-          <button type="button" onClick={() => set('category', c)} className="shrink-0 text-xs text-slate-400 hover:text-white">
-            See all →
-          </button>
-        ),
+        games: results.filter((g) => g.categories[0] === c),
       })),
-    [],
+    [results],
   )
+  const byGroupSize = useMemo(() => GROUP_SIZES.map((b) => ({ title: `👥 ${b.title}`, subtitle: b.subtitle, games: results.filter((g) => fitsGroup(g, b)) })), [results])
 
   return (
     <Layout fullBleed>
       {!active ? <Hero game={featured} /> : null}
 
-      <section className={`mx-auto w-full max-w-[1600px] px-4 md:px-8 ${active ? 'pt-6' : '-mt-6 relative z-10'}`}>
+      <section className={`mx-auto w-full max-w-[1600px] px-4 md:px-8 ${active ? "pt-6" : "-mt-6 relative z-10"}`}>
         <div className="flex flex-col gap-3">
           <div className="relative">
             <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-slate-500">🔍</span>
@@ -101,29 +97,56 @@ export function Home() {
         </div>
       </section>
 
-      {active ? (
-        <section className="mx-auto w-full max-w-[1600px] px-4 pt-6 md:px-8">
-          <p className="mb-3 text-sm text-slate-500">
-            {results.length} {results.length === 1 ? 'game' : 'games'}
-          </p>
-          {results.length === 0 ? (
-            <p className="py-16 text-center text-slate-400">No games match — try loosening a filter.</p>
-          ) : (
-            <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-              {results.map((g) => (
-                <GameCard key={g.slug} game={g} />
-              ))}
-            </div>
-          )}
-        </section>
+      {results.length === 0 ? (
+        <p className="py-16 text-center text-slate-400">No games match — try loosening a filter.</p>
       ) : (
-        <div className="mt-8 flex flex-col gap-6">
-          {rows.map((r) => (
-            <Row key={r.title} {...r} />
-          ))}
+        <div className="mt-8 flex flex-col gap-4">
+          <Collapsible title="By category" count={results.length}>
+            {byCategory.map((r) => (
+              <Row key={r.title} {...r} />
+            ))}
+          </Collapsible>
+          <Collapsible title="By group size" count={results.length}>
+            {byGroupSize.map((r) => (
+              <Row key={r.title} {...r} />
+            ))}
+          </Collapsible>
         </div>
       )}
     </Layout>
+  )
+}
+
+const GROUP_SIZES = [
+  { title: 'Just 2', subtitle: 'Head-to-head', min: 2, max: 2 },
+  { title: '3–4 players', subtitle: 'A small table', min: 3, max: 4 },
+  { title: '5–6 players', subtitle: 'The sweet spot for most games', min: 5, max: 6 },
+  { title: '7–8 players', subtitle: 'A full room', min: 7, max: 8 },
+  { title: '9+ players', subtitle: 'The whole party', min: 9, max: 99 },
+]
+
+/** A game belongs to a bucket if any of its recommended counts fall in it (falling back to its supported range). */
+function fitsGroup(g: GameMeta, b: { min: number; max: number }): boolean {
+  if (g.bestPlayers.length) return g.bestPlayers.some((n) => n >= b.min && n <= b.max)
+  return g.minPlayers <= b.max && g.maxPlayers >= b.min
+}
+
+function Collapsible({ title, count, children }: { title: string; count: number; children: ReactNode }) {
+  const [open, setOpen] = useState(true)
+  return (
+    <section>
+      <button
+        type="button"
+        onClick={() => setOpen((o) => !o)}
+        aria-expanded={open}
+        className="mx-auto flex w-full max-w-[1600px] items-center gap-3 px-4 py-3 text-left md:px-8"
+      >
+        <span className={`inline-block text-slate-400 transition-transform ${open ? 'rotate-90' : ''}`}>▶</span>
+        <h2 className="text-2xl font-black tracking-tight md:text-3xl">{title}</h2>
+        <span className="text-sm text-slate-500">{count} games</span>
+      </button>
+      {open ? <div className="flex flex-col gap-6 pt-2">{children}</div> : null}
+    </section>
   )
 }
 
