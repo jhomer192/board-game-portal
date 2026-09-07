@@ -75,7 +75,7 @@ export function Discover() {
                     type="button"
                     aria-pressed={on}
                     onClick={() => toggle(c)}
-                    className={`flex items-start gap-3 rounded-xl px-3 py-2 text-left transition ${on ? 'bg-indigo-500/20 ring-1 ring-indigo-400' : 'hover:bg-slate-800'}`}
+                    className={`flex items-start gap-3 rounded-xl px-3 py-2 text-left transition ${on ? 'bg-white/15 ring-1 ring-white/60' : 'hover:bg-white/[0.06]'}`}
                   >
                     <span className="text-xl">{info.emoji}</span>
                     <span>
@@ -124,7 +124,7 @@ export function Discover() {
           {picks.length === 0 ? (
             <p className="py-16 text-center text-slate-400">Try fewer categories or a different player count.</p>
           ) : (
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <div className="grid grid-cols-2 gap-3 md:grid-cols-3">
               {picks.map((g) => (
                 <GameCard key={g.slug} game={g} />
               ))}

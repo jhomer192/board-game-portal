@@ -25,7 +25,10 @@ export function usePath(): string {
 export function navigate(to: string, replace = false) {
   const url = BASE + to
   if (replace) window.history.replaceState(null, '', url)
-  else window.history.pushState(null, '', url)
+  else {
+    window.history.pushState(null, '', url)
+    window.scrollTo({ top: 0 })
+  }
   window.dispatchEvent(new Event('bgp:navigate'))
 }
 
