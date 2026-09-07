@@ -1,3 +1,5 @@
+import { MORE_GAMES } from './catalog-more.ts'
+
 export type Category =
   | 'party'
   | 'social deduction'
@@ -1121,6 +1123,7 @@ export const CATALOG: GameMeta[] = [
       { label: 'Tabletop Simulator', url: 'https://www.tabletopsimulator.com', note: 'Paid, Steam' },
     ],
   },
+  ...MORE_GAMES,
 ]
 
 export const CATALOG_BY_SLUG: Record<string, GameMeta> = Object.fromEntries(CATALOG.map((g) => [g.slug, g]))
