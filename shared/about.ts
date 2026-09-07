@@ -262,4 +262,165 @@ export const ABOUT: Record<string, string[]> = {
     'Not a game but a virtual table: decks, hands, dice, tokens, and boards you arrange yourself. Load a template for a classic game or build your own house rules from scratch, then share a room link.',
     'Ideal for that obscure family card game that nobody has implemented, or for testing your own prototype. Free and browser-based.',
   ],
+  decrypto: [
+    'Each team has four keywords numbered 1–4 that only they can see. Every round one teammate draws a three-digit code (say 4-2-1) and gives three clues pointing at those keywords in order. Your team must decode it; the other team listens and tries to intercept.',
+    'The genius is the arms race: clues have to get more oblique every round because the enemy is building a picture of your words, but too oblique and your own side miscommunicates. Two interceptions win; two miscommunications lose.',
+    'decrypto.online is a free fan implementation with private rooms — put both teams on a call and mute during huddles.',
+  ],
+  'just-one': [
+    'One player is the guesser and closes their eyes. Everyone else sees a mystery word and writes a single-word clue. Before the guesser looks, identical clues are cancelled out — so the obvious clue is exactly the one you should not write.',
+    'Fully cooperative, teaches in a minute, and won the Spiel des Jahres. It is at its best with 6–7 because the cancellations get ruthless.',
+    'Board Game Arena runs it for free in real time; you will want a voice call for the groaning when three of you wrote the same thing.',
+  ],
+  werewords: [
+    'The Mayor knows a secret word. Everybody asks yes/no questions and gets a token — yes, no, maybe, so close — with four minutes to guess it. But one player is a Werewolf who knows the word and wants you to fail, and the Seer knows it too and must help without being obvious.',
+    'If the village guesses, the werewolves get one shot at naming the Seer; if not, the villagers vote on who the werewolf is. Ten minutes, no elimination, wildly replayable.',
+    'The free official app at werewords.com handles roles, the word, and the timer; you supply the shouting.',
+  ],
+  'town-of-salem': [
+    'A big-group evolution of Mafia with role cards for everyone: Town roles (Sheriff, Doctor, Jailor, Investigator), the Mafia (Godfather, Framer, Blackmailer), and chaotic Neutrals like the Serial Killer and the Jester, who wins only if you lynch them.',
+    'Days are trials with public accusations and defense speeches; nights are when the killers, healers and investigators act. Written wills and last words make every game a mystery novel.',
+    'Free to play in the browser with public lobbies, so it also works when you do not have 15 friends online at once.',
+  ],
+  diplomacy: [
+    'Seven European powers in 1901. Every unit gets one order per turn — hold, move, support, convoy — and all orders are revealed and resolved at the same time. There are no dice: an attack succeeds only if it has more support than the defense.',
+    'Since one unit can never dislodge another alone, the whole game is the negotiation phase before orders lock. Alliances form, promises are made, and someone always stabs someone. Legendary for ending friendships.',
+    'Backstabbr has the nicest interface for private games with friends; webDiplomacy is the long-running community site with public games and tournaments. Turns usually run 24 hours, so it is a week-long group chat rather than a single evening.',
+  ],
+  'risk-warzone': [
+    'The Risk formula: place armies, attack neighbouring territories, and earn bonus armies for holding whole continents. Warzone keeps the core but adds hundreds of community maps, fog of war options, and simultaneous turns that fix the endless waiting.',
+    'Play real-time games in an hour or multi-day games with one move a day. Free tier is generous; a membership unlocks more maps and features.',
+    'Dominating 12 is closer to the physical board if you want classic dice-rolling Risk.',
+  ],
+  'monopoly-richup': [
+    'Roll, move, buy the property you land on, and build houses once you own a set. Rent bleeds your opponents dry until only one remains. You know this one.',
+    'Richup.io is a slick free browser version with private rooms, trading, auctions, and house rules like collecting Free Parking money — plus it is faster than the real thing because it does the bookkeeping.',
+  ],
+  yahtzee: [
+    'Roll five dice up to three times, keeping the ones you want, then score the result in one of thirteen boxes: threes, full house, large straight, and the 50-point Yahtzee. Each box can be used once, so late-game rolls get desperate.',
+    'cardgames.io lets you make a private multiplayer table, no accounts required.',
+  ],
+  backgammon: [
+    'Move your fifteen checkers around the board according to two dice, bear them off before your opponent, and hit their lone “blots” to send them back to the start. The doubling cube adds a gambling layer that makes every game about knowing when you are ahead.',
+    'Five thousand years old and still the best two-player dice game there is.',
+    'cardgames.io has private rooms for a quick match; bkgm.com has rules, opening tables and strategy when you want to actually get good.',
+  ],
+  checkers: [
+    'Lidraughts is what Lichess is for chess: free, open source, no ads, with live games, ratings, puzzles and analysis. It supports international draughts on a 10×10 board plus English checkers, Russian, Brazilian and other variants.',
+    'Create a game and send the link to a friend — they do not need an account.',
+  ],
+  'hearts-spades': [
+    'Hearts: four players, no partners, avoid taking hearts (1 point each) and the Queen of Spades (13) — unless you can take them all and “shoot the moon”. Spades: two partnerships bid how many tricks they will take, spades are always trump, and going nil is the big gamble.',
+    'Both are perfect for a standing four-person group who want a familiar game with real skill.',
+    'cardgames.io runs both with private multiplayer tables and bots to fill empty seats.',
+  ],
+  hive: [
+    'No board — the pieces are the board. Each bug moves differently: the queen bee steps one space, beetles climb on top, grasshoppers jump lines, spiders move exactly three, ants run anywhere. Surround the enemy queen to win.',
+    'The one rule that makes it sing: the hive must never be split, so many pieces are pinned and every move is a small puzzle. It has real depth and a tournament scene.',
+    'HiveGame.com is the official free real-time server; Board Game Arena also has it if your group is already there.',
+  ],
+  onitama: [
+    'A 5×5 board, five pieces a side, and five movement cards. When you use a card to move, it slides across to your opponent, who can use it later — so every attack also arms the enemy.',
+    'Win by capturing the master or walking your master onto their temple. Games take fifteen minutes and there are enough card combinations that no two feel the same.',
+  ],
+  'seven-wonders-duel': [
+    'Cards are laid out in a pyramid, some face down, and you may only take an uncovered card. Build resources, science, military and civic buildings across three ages. Win instantly by conquering with military or collecting six science symbols — or on points.',
+    'Many consider it the best two-player game ever designed: tight, fast, and full of moments where you realise the card you just uncovered is exactly what your opponent needed.',
+  ],
+  'stone-age': [
+    'Place your tribe members on the board — forest for wood, quarry for stone, river for gold, hunting grounds for food — then roll dice for each worker to see what they bring back. Spend it on huts and civilisation cards, and feed everyone at the end of the round.',
+    'The dice give it a friendly, pushing-your-luck feel that makes it the ideal first “real” euro for a group used to party games.',
+  ],
+  'puerto-rico': [
+    'Each round players take turns choosing a role — Settler, Mayor, Builder, Craftsman, Trader, Captain — and everybody performs the action, but the chooser gets a bonus. Plant plantations, staff them with colonists, produce goods, and ship them for points.',
+    'It sat at the very top of BoardGameGeek for years for good reason: the interaction is entirely in role timing. Pick Captain when your opponents have goods but no ship space and watch them rot.',
+  ],
+  tokaido: [
+    'Walk the road from Kyoto to Edo, stopping at inns, temples, hot springs and villages. Each stop collects something — panorama pieces, souvenirs, meals — and the player at the back of the road always moves next.',
+    'It is beautiful and calm, but the movement rule hides a real game: moving far claims the best spots first; dawdling gives you more turns.',
+  ],
+  takenoko: [
+    'Grow a bamboo garden tile by tile, irrigate it, then move the gardener (who grows bamboo) and the panda (who eats it) to complete secret objective cards. A weather die adds a small bonus each turn.',
+    'Light, adorable, and a great choice for mixed groups of gamers and non-gamers.',
+  ],
+  'six-nimmt': [
+    'Everyone picks a card from their hand and reveals at once. Cards are placed in ascending order onto four rows; whoever plays the sixth card in a row must take the first five and eat their bull-heads (penalty points).',
+    'You can plan, but with eight people the rows fill up faster than you expect, and the panic is the fun. Ten rounds, lowest score wins.',
+  ],
+  'race-for-the-galaxy': [
+    'Everybody secretly chooses a phase (Explore, Develop, Settle, Consume, Produce), then all chosen phases happen for everyone, with the chooser getting a bonus. Cards in hand are also your currency: to build a planet costing three, you discard three cards.',
+    'Dense with iconography and takes a couple of plays to click, but then it is a 30-minute engine-building masterpiece with huge variety. Board Game Arena teaches you the icons as you go.',
+  ],
+  coloretto: [
+    'On your turn either flip a card and add it to a row, or take a row and sit out the rest of the round. Chameleon cards come in seven colours; your three biggest sets score positively and every other colour scores against you.',
+    'A perfect ten-minute filler and the ancestor of Zooloretto.',
+  ],
+  tichu: [
+    'Partners sit opposite. Play single cards, pairs, straights and full houses that must beat the previous play, trying to empty your hand before the other team. Special cards — Mah Jong, Dog, Phoenix, Dragon — twist the rules. Before playing you may call Tichu (100 points) or Grand Tichu (200) to bet you will go out first.',
+    'Huge in Germany and among gamers who like a card game with real long-term partnership strategy. Games go to 1,000 points.',
+  ],
+  draftosaurus: [
+    'Take a dinosaur from your hand, pass the rest, and place it in one of your park’s pens — each pen scores differently (all the same species, all different, pairs, biggest, etc.). One player rolls a placement die each turn that restricts where everyone else can put theirs.',
+    'Fifteen minutes and very kid-friendly, but the pen puzzle gives adults something to chew on.',
+  ],
+  'kingdom-builder': [
+    'Draw a terrain card, place three houses on that terrain, adjacent to your own if possible. That mandatory adjacency is the whole game: you will be dragged toward regions you do not want unless you plan ahead. Three scoring cards from a pool of ten change how you win every game.',
+    'Spiel des Jahres winner that plays in 45 minutes and rewards spatial thinking.',
+  ],
+  quoridor: [
+    'Get your pawn to the opposite side of a 9×9 board. On your turn you either move one space or place one of your ten walls to block your opponent — but you may never seal off their path entirely.',
+    'A ten-minute abstract that is easy enough for kids and still a genuine head-to-head puzzle.',
+  ],
+  'sea-salt-paper': [
+    'Draw two cards from the deck and keep one, or take the top of a discard pile. Play pairs for immediate effects — steal a card, take another turn, peek at the deck. When you have seven points in hand you may end the round: either stop and score, or call “last chance” and bet that after one more turn each you are still highest.',
+    'Origami-styled art and a lot of tension for such a small deck.',
+  ],
+  hanamikoji: [
+    'Seven geisha, each favouring certain item cards. Over a round you take four actions exactly once: secret (keep one), trade-off (discard two), gift (offer three, opponent picks one, you keep two), and competition (offer two pairs, opponent picks one). Win a geisha by having more of her items.',
+    'One of the most elegant two-player games there is, playing in fifteen minutes with real bluffing.',
+  ],
+  'for-sale': [
+    'Round one: bid on property cards numbered 1–30, paying only for the ones you win. Round two: cheques are revealed each turn and everyone secretly plays a property; highest property takes the biggest cheque.',
+    'The whole game is ten minutes and it works for three to six players, so it is a perfect opener or closer.',
+  ],
+  'incan-gold': [
+    'Explore a temple together, card by card. Treasure cards are split among everyone still inside; hazard cards are fine once, but the second copy of the same hazard collapses the temple and everyone inside loses everything. Before each card, players secretly choose to stay or leave — and leavers pick up any leftover gems on the way out.',
+    'Simultaneous decisions keep everyone involved, and it is all over in 20 minutes. Also published as Diamant.',
+  ],
+  'railroad-ink': [
+    'Four dice are rolled each round showing road and rail segments. Everyone draws them onto their own 7×7 grid, trying to connect the twelve exits around the edge, build a long highway and railway, and avoid dead ends.',
+    'Zero direct interaction, so it is ideal for mixed-skill groups and even solo. Board Game Arena scores it for you.',
+  ],
+  'castles-of-burgundy': [
+    'Roll two dice. Each die lets you take a tile from a matching depot, place a tile onto a matching number in your estate, sell goods, or take workers that adjust dice. Completing a region of the same colour scores more the earlier in the game you finish it.',
+    'Stefan Feld’s masterpiece: it looks like a beige spreadsheet and plays like a dream, with dice mitigated so thoroughly that you never feel cheated.',
+  ],
+  agricola: [
+    'Your family of two must plough fields, sow grain, fence pastures, breed sheep, boars and cattle, renovate the house from wood to clay to stone — and, six times over the game, eat. Unfed family members beg, and begging costs three points each.',
+    'Hundreds of occupation and improvement cards make every game different. Heavy but deeply rewarding, and one of the most-played games on Board Game Arena.',
+  ],
+  'ark-nova': [
+    'Run a zoo using five action cards whose strength depends on their position in your row; using one sends it back to position one. Build enclosures on your hex map, play animal cards into them, and pursue conservation projects.',
+    'Two scoring tracks — appeal and conservation — move toward each other, and the game ends when they cross. Sprawling and brilliant; expect your first play to run long.',
+  ],
+  'gaia-project': [
+    'Choose one of fourteen factions, each tied to a planet type and with unique abilities. Terraform planets to build mines, upgrade them to trading stations and research labs, form federations, and climb six research tracks.',
+    'The economy is unforgiving and there is no randomness after setup. Expect three hours and a lot of thinking.',
+  ],
+  'through-the-ages': [
+    'Grow a civilisation across four ages using a rolling card row: technologies, leaders like Aristotle and Napoleon, wonders, and military units. Balance culture (points), science, food, resources, happiness and military strength — falling behind in military invites aggression.',
+    'The card-row market and no map keep it focused on the civilization arc. Long, but many people’s favourite game ever.',
+  ],
+  'boggle-wordshake': [
+    'A 4×4 grid of letters and three minutes. Find words by connecting adjacent letters (including diagonals) without reusing a tile; longer words score more.',
+    'Wordshake is a free browser Boggle — share a grid seed and compare scores, or just race the clock alone.',
+  ],
+  'connect-four-battleship': [
+    'papergames.io is a collection of the simple games everyone grew up with: drop pieces to connect four, call coordinates to sink ships, or get five in a row in Gomoku. Create a room, send the link, play in the browser.',
+    'Great for a quick head-to-head while you wait for the rest of the group to show up.',
+  ],
+  wikitrivia: [
+    'A free Timeline: you get a card with a historical event or person and must drop it into the correct spot on a growing chronological line. One wrong placement ends the game; how long a streak can you build?',
+    'Solo by design, but it works brilliantly as a group screen-share argument.',
+  ],
 }
