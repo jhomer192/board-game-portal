@@ -6,7 +6,7 @@ import { Link } from '../lib/router.tsx'
 import { screenshotFor } from '../lib/screenshots.ts'
 
 /** Game of the day: a different catalog game every local calendar day, same for everyone. */
-export function gameOfTheDay(date = new Date()): GameMeta {
+function gameOfTheDay(date = new Date()): GameMeta {
   const key = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`
   let h = 2166136261
   for (const ch of key) h = Math.imul(h ^ ch.charCodeAt(0), 16777619) >>> 0
