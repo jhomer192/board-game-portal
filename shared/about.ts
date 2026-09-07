@@ -1,5 +1,8 @@
+import { ABOUT_BATCH3 } from './about-batch3.ts'
+
 /** Longer write-ups per game slug. Each entry is a list of short paragraphs. */
 export const ABOUT: Record<string, string[]> = {
+  ...ABOUT_BATCH3,
   codenames: [
     'Twenty-five word cards are laid out in a grid. Each team has a spymaster who secretly knows which words belong to their agents, which are innocent bystanders, and which single word is the assassin. On their turn, the spymaster says exactly one word and one number — “Ocean, 3” — and their team debates which cards they meant.',
     'The magic is in the trade-off between ambitious clues that cover many words and safe clues that cover one. Guess the assassin and you lose instantly.',

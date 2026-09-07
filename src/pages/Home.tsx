@@ -143,7 +143,7 @@ function Collapsible({ title, count, children }: { title: string; count: number;
       >
         <span className={`inline-block text-slate-400 transition-transform ${open ? 'rotate-90' : ''}`}>▶</span>
         <h2 className="text-2xl font-black tracking-tight md:text-3xl">{title}</h2>
-        <span className="text-sm text-slate-500">{count} games</span>
+        <span className="text-sm text-slate-500">{count} {count === 1 ? "game" : "games"}</span>
       </button>
       {open ? <div className="flex flex-col gap-6 pt-2">{children}</div> : null}
     </section>
