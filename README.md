@@ -26,3 +26,7 @@ Edit `shared/catalog.ts` and append a `GameMeta` entry. Tests enforce unique slu
 ## Stack
 
 React 19 + TypeScript, Vite, Tailwind CSS v4. Client-only, no backend.
+
+A project by [Jack Homer](https://jackhomer.com/).
+
+[Browse Tabletop Portal](https://jackhomer.com/board-game-portal/) · [Project write-up](https://jackhomer.com/projects/board-game-portal/)
